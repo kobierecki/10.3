@@ -1,7 +1,6 @@
 $(function(){
     var carouselList = $("#carousel ul")
 
-    //co tu sie dzieje
     function moveFirstSlide() {
         var firstItem = carouselList.find("li:first");
         var lastItem = carouselList.find("li:last");
@@ -48,7 +47,27 @@ $(function(){
     var slidesArray = document.getElementsByClassName('js-change-slide');
 
     $('.js-change-slide').click(function(slidesArray){
-        var firstItem = carouselList.find("li:first");
+        var firstItem = carouselList.find('li:first');
+        var curentSlide = firstItem.attr('data-num');
+        var clickedButton = $(this).attr('data-num');
+
+        clearInterval(setCarouselIntervalVar); 
+
+        if (curentSlide > clickedButton) {
+            var slidesDifference = curentSlide - clickedButton;
+            for(var i = slidesDifference; i > 0; i--) {
+                moveSlideBack();
+            } 
+            carouselList.animate({'marginLeft':0}, 500);
+            setCarouselInterval();
+        } else {
+            var slidesDifference = clickedButton - curentSlide;
+            clearInterval(setCarouselIntervalVar);
+            for(var i = slidesDifference; i > 0; i--) {
+                carouselList.animate({'marginLeft':-400}, 400, moveFirstSlide);
+            }
+            setCarouselInterval();
+        }
     });
         
 });
