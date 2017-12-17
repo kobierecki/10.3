@@ -45,8 +45,10 @@ $(function(){
 
     //PAGINATION 
 
-    $('#js-change-slide').click(function(){
-        console.log("ck");
+    var slidesArray = document.getElementsByClassName('js-change-slide');
+
+    $('.js-change-slide').click(function(slidesArray){
+        var firstItem = carouselList.find("li:first");
     });
         
 });
