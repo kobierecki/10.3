@@ -19,11 +19,34 @@ $(function(){
       setCarouselIntervalVar = setInterval(changeSlide, 3000);
     };
 
+    function moveSlideBack(){
+        var firstItem = carouselList.find("li:first");
+        var lastItem = carouselList.find("li:last");
+        firstItem.before(lastItem);
+        carouselList.css({marginLeft:-400});
+    }
+
     setCarouselInterval();
 
     //ARROWS HANDLER
 
-    $("#js-left-arrow").click()
+    $("#js-right-arrow").click(function(){
+        clearInterval(setCarouselIntervalVar);
+        changeSlide();
+        setCarouselInterval();
+    });
 
-    $("#js-right-arrow").click()
-})
+    $("#js-left-arrow").click(function(){
+        clearInterval(setCarouselIntervalVar); 
+        moveSlideBack();
+        carouselList.animate({'marginLeft':0}, 500);
+        setCarouselInterval();
+    });
+
+    //PAGINATION 
+
+    $('#js-change-slide').click(function(){
+        console.log("ck");
+    });
+        
+});
